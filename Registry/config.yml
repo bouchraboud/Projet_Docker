@@ -1,0 +1,27 @@
+version: 0.1
+
+log:
+  fields:
+    service: registry
+    environment: production
+
+http:
+  addr: :5000
+  secret: a-random-secret
+  headers:
+    Access-Control-Allow-Origin: ['http://localhost:8081']  # Doit permettre l'accès depuis l'UI
+    Access-Control-Allow-Methods: ['HEAD', 'GET', 'OPTIONS', 'PUT', 'POST', 'DELETE']
+    Access-Control-Allow-Headers: ['Authorization', 'Accept', 'Content-Type', 'X-Requested-With']
+    Access-Control-Expose-Headers: ['Docker-Content-Digest', 'Location', 'WWW-Authenticate']
+    X-Content-Type-Options: ['nosniff']
+
+health:
+  storagedriver:
+    enabled: true
+    interval: 10s
+    threshold: 3
+
+storage:
+  filesystem:
+    rootdirectory: /var/lib/registry
+
